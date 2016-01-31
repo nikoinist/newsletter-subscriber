@@ -20,6 +20,30 @@ class Newsletter_Subscriber_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		// outputs the content of the widget
+		echo $args['before_widget'];
+		echo $args['before_title'];
+		if(!empty($instance['title'])){
+			echo $instance['title'];
+		}
+		echo $args['after_title'];
+		?>
+			<div id="form-msg"></div>
+			<form id="subscriber-form" method="post" action="<?php echo plugins_url().'/newsletter-subscriber/includes/newsletter-subscriber-mailer.php'; ?>">
+			 	<div class="form-group">
+			 		<label for="name">Name:</label><br>
+			 		<input type="text" id="name" name="name" class="form-control" required />
+			 	</div>
+			 	<div class="form-group">
+			 		<label for="email">Email:</label><br>
+			 		<input type="text" name="email" class="form-control" required />
+			 	</div>
+			 	<br>
+			 	<input type="hidden" name="recipient" value="<?php echo $instance['recipient']; ?>"/>
+			 	<input type="hidden" name="subject" value="<?php echo $instance['subject']; ?>"/>
+			 	<input type="submit" class="btn btn-primary" name="subscriber_submit" value="subscribe"/>
+			</form>
+		<?php
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -58,5 +82,11 @@ class Newsletter_Subscriber_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		// processes widget options to be saved
+		$instance = array(
+				'title' => (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '',
+				'recipient' => (!empty($new_instance['recipient'])) ? strip_tags($new_instance['recipient']) : '',
+				'subject' => (!empty($new_instance['subject'])) ? strip_tags($new_instance['subject']) : ''
+			);
+		return $instance;
 	}
 }
