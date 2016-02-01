@@ -35,7 +35,7 @@ class Newsletter_Subscriber_Widget extends WP_Widget {
 			 	</div>
 			 	<div class="form-group">
 			 		<label for="email">Email:</label><br>
-			 		<input type="text" name="email" class="form-control" required />
+			 		<input type="text" id="email" name="email" class="form-control" required />
 			 	</div>
 			 	<br>
 			 	<input type="hidden" name="recipient" value="<?php echo $instance['recipient']; ?>"/>
