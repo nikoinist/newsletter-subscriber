@@ -15,4 +15,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         exit;
     }
     
+    //Build Email
+    
+    $message = "Name: $name \n";
+    $message .= "Email: $email\n\n";
+    
+    // Build Headers
+    $headers = "From: $name <$email>";
+    
+    //send emial
+    
+    if(mail($recipient, $subject, $message, $headers)){
+        http_response_code(200);
+        echo "You are now subscribed";
+    } else {
+        http_response_code(500);
+        echo "There is a problem";
+    }
+} else {
+    http_response_code(403);
+        echo "There was a problem";
 }
