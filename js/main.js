@@ -21,8 +21,8 @@ jQuery(document).ready(function($){
            $('#form-msg').text(response);
            
            //clear Fields
-           $('#name').val(' ');
-           $('#email').val(' ');
+           $('#name').val('');
+           $('#email').val('');
        
            
        }).fail(function(data){
